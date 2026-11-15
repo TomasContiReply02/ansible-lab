@@ -1,0 +1,4 @@
+---
+lab_app_name: demo
+lab_environment: local
+lab_app_port: 8080

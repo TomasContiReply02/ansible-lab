@@ -1,0 +1,46 @@
+---
+- name: Verifica il laboratorio Ansible
+  hosts: test
+  gather_facts: false
+
+  tasks:
+    - name: Carica i default del ruolo senza configurare il target
+      ansible.builtin.include_role:
+        name: lab_setup
+        tasks_from: verify_noop
+        public: true
+
+    - name: Controlla le directory
+      ansible.builtin.stat:
+        path: "{{ lab_root }}/{{ item }}"
+      loop:
+        - config
+        - data
+        - logs
+      register: lab_directories
+
+    - name: Verifica che le directory esistano
+      ansible.builtin.assert:
+        that:
+          - item.stat.exists
+          - item.stat.isdir | default(false)
+        fail_msg: "Directory mancante o non valida: {{ item.item }}"
+        quiet: true
+      loop: "{{ lab_directories.results }}"
+      loop_control:
+        label: "{{ item.item }}"
+
+    - name: Legge la configurazione generata
+      ansible.builtin.slurp:
+        src: "{{ lab_root }}/config/application.conf"
+      register: lab_config
+
+    - name: Verifica il contenuto della configurazione
+      ansible.builtin.assert:
+        that:
+          - "('name = ' ~ lab_app_name) in lab_config_lines"
+          - "('environment = ' ~ lab_environment) in lab_config_lines"
+          - "('port = ' ~ (lab_app_port | string)) in lab_config_lines"
+        success_msg: "Configurazione verificata correttamente."
+      vars:
+        lab_config_lines: "{{ (lab_config.content | b64decode).splitlines() }}"

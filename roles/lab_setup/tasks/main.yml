@@ -1,0 +1,16 @@
+---
+- name: Valida i parametri del laboratorio
+  ansible.builtin.assert:
+    that:
+      - lab_root == '/tmp/ansible-lab'
+      - lab_app_name | length > 0
+      - lab_environment in ['local', 'development', 'test', 'production']
+      - (lab_app_port | int) >= 1
+      - (lab_app_port | int) <= 65535
+    fail_msg: "Parametri non validi: controllare le variabili del laboratorio."
+
+- name: Configura le directory
+  ansible.builtin.import_tasks: directories/main.yml
+
+- name: Configura il file applicativo
+  ansible.builtin.import_tasks: configuration/main.yml

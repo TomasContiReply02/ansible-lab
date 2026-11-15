@@ -1,0 +1,7 @@
+---
+- name: Configura il laboratorio Ansible
+  hosts: test
+  gather_facts: false
+
+  roles:
+    - lab_setup

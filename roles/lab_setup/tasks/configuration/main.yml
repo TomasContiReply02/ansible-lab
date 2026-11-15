@@ -1,0 +1,7 @@
+---
+- name: Genera la configurazione applicativa
+  ansible.builtin.template:
+    src: application.conf.j2
+    dest: "{{ lab_root }}/config/application.conf"
+    mode: '0644'
+  notify: Segnala aggiornamento configurazione

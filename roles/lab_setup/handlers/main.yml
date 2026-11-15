@@ -1,0 +1,4 @@
+---
+- name: Segnala aggiornamento configurazione
+  ansible.builtin.debug:
+    msg: "La configurazione di {{ lab_app_name }} è stata aggiornata."

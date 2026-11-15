@@ -1,0 +1,10 @@
+---
+- name: Crea le directory del laboratorio
+  ansible.builtin.file:
+    path: "{{ lab_root }}/{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - config
+    - data
+    - logs

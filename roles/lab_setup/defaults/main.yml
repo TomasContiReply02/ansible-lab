@@ -1,0 +1,5 @@
+---
+lab_root: /tmp/ansible-lab
+lab_app_name: example
+lab_environment: development
+lab_app_port: 8080
