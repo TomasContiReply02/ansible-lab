@@ -17,3 +17,6 @@
 
 - name: Mostra il messaggio specifico per OS
   ansible.builtin.import_tasks: os_message/main.yml
+
+- name: Configura utente e gruppo
+  ansible.builtin.import_tasks: users/main.yml

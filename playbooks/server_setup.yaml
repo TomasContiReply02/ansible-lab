@@ -2,6 +2,7 @@
 - name: Configura il laboratorio Ansible
   hosts: test  #execute on the hosts of the group test
   #gather system facts for OS-specific tasks into a dictionary called ansible_facts
+  #that have :os_family: Debian, distribution: Ubuntu ..
   gather_facts: true
   roles:
     - lab_setup #execute the role for env configuration
