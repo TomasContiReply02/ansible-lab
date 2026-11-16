@@ -1,0 +1,4 @@
+---
+- name: Mostra il messaggio in base all'OS
+  ansible.builtin.debug:
+    msg: "{{ lab_os_messages[ansible_facts['os_family']] }}"

@@ -14,3 +14,6 @@
 
 - name: Configura il file applicativo
   ansible.builtin.import_tasks: configuration/main.yml
+
+- name: Mostra il messaggio specifico per OS
+  ansible.builtin.import_tasks: os_message/main.yml

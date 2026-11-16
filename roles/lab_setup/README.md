@@ -1,6 +1,8 @@
 Role Name
 =========
-
+https://docs.ansible.com/projects/awx/en/24.6.1/quickstart/create_inventory.html
+https://blog.abctaylor.com/how-to-structure-ansible-code-for-awx/
+=========
 A brief description of the role goes here.
 
 Requirements
